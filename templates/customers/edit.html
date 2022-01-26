@@ -1,0 +1,43 @@
+{% extends "Dashboard.html" %}
+{% load static %}
+{% block content %}
+<div class="col-lg-8"  >
+    <h2 class="mt-3">UPDATE CUSTOMER DETAILS</h2>
+    <br />
+    <form action="customer_update/{{customer.id}}" method="POST" >
+        {% csrf_token %}
+        <!-- fullname -->
+        <div class="input-group md-form form-sm ">
+            <div class="input-group-append"   >
+                <span class="icon"><i class="fa fa-user mt-2 p-2"></i></span>
+                <input type="text" maxlength="200"  name="name" value="{{customer.name}}" id="fullname"
+                       class="form-control mt-2" placeholder="FullName" style="width:450px">
+            </div>
+        </div>
+        <!-- email -->
+        <div class="input-group md-form form-sm ">
+            <div class="input-group-append">
+                <span class="icon"><i class="fa fa-envelope mt-2 p-2 "></i></span>
+                <input type="email" name="email"  maxlength="200" value="{{customer.email}}"
+                       id="email" class="form-control mt-2" placeholder="Email Address" style="width:450px">
+            </div>
+        </div>
+        <!-- Address -->
+        </div>
+        <!-- Phone number-->
+        <div class="input-group md-form form-sm ">
+            <div class="input-group-append">
+                <span class="icon"><i class="fa fa-phone-square mt-2 p-2 "></i></span>
+                <input type="text"  name="phone"  maxlength="10"  value="{{customer.phone}}"
+                       id="phone" class="form-control mt-2" placeholder="Phone Number" style="width:450px">
+            </div>
+        </div>
+        <div class="message ml-4"></div>
+        <!--Buttons -->
+        <div class="btn-group m-3">
+            <input value="Update" type="submit" class="btn btn-success pl-5 ml-5 pr-5 " style="margin-right: 16px;" />
+            <a href="/view"><button type="button"  class="btn btn-danger ml-3 pl-5 pr-5">Cancel</button></a>
+        </div>
+    
+    </form>
+    {% endblock%}

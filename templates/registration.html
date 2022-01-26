@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"></html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/registrationcss.css' %}">
+    <script defer src="{% static 'js/validation.js' %}"></script>
+</head>
+<body>
+
+  <form id = "form" action="registration" method="post">
+    {% csrf_token %}
+    <h1>Sign Up</h1>
+    
+   
+     <div class="input-control">
+      <label for="name">Name:</label>
+      <input type="text" id="username" name="name">
+      <div class="error"></div>
+      
+    </div>
+      <div class="input-control">
+      <label for="mail">Email:</label>
+      <input type="email" id="mail" name="email">
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="password">Password:</label>
+      <input type="password" id="password1" name="password1">
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+        <label for=" Confirm password">Password:</label>
+        <input type="password" id="password2" name="password2">
+        <div class="error"></div>
+      </div>
+      <label>Age:</label>
+      <input type="radio" id="under_13" value="under_13" name="user_age"><label for="under_13" class="light">Under 13</label><br>
+      <input type="radio" id="over_13" value="over_13" name="user_age"><label for="over_13" class="light">13 or older</label>
+    
+    
+    <button type="submit">Sign Up</button>
+  </form>
+  
+</body>
+</html>

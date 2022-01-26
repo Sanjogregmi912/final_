@@ -1,0 +1,56 @@
+{% extends "Dashboard.html" %}
+{% load static %}
+{% block content %}
+<script defer src="{% static 'js/customer_validation.js' %}"></script>
+<div class="col-lg-6"  >
+    <h2 class="mt-3">ADD CUSTOMER</h2>
+    <br/>
+<form action="customer_create" method="post" onsubmit="return(validate())">
+{% csrf_token %}
+<div class=" input-group md-form form-sm">
+    <div class="input-group-append">
+        <span class="icon"><i class="fa fa-user mt-2 p-2"></i></span>
+        <input type="text" name="name" id="fullname" class="form-control mt-2 icon " placeholder="   fullname" style="width: 450px">
+        <div class="error"> </div>
+    </div>
+    <div class="input-group md-form form-sm ">
+        <div class="input-group-append">
+            <span class="icon"><i class="fa fa-envelope mt-2 p-2 "></i></span>
+            <input type="email" name="email"  id="email"  class="form-control mt-2 icon " placeholder="   Email Address" style="width:450px">
+            <div class="error"> </div>
+        </div>
+    </div>
+    <div class="input-group md-form form-sm ">
+        <div class="input-group-append">
+            <span class="icon"><i class="fa fa-phone-square mt-2 p-2 icon "></i></span>
+            <input type="text" name="phone" id="phone"  class="form-control mt-2" placeholder="   Phone Number" style="width:450px">
+            <div class="error"> </div>
+        </div>
+    </div>
+    <div class="message ml-4"></div>
+    <br/>
+    <div class="btn-group m-3 buttons">
+        <input value="Confirm Add" type="submit" class="btn btn-success ml-5" style="margin-right: 16px;"/>
+        <a href="/customer/index"><button type="button"  class="btn btn-danger ml-3">
+            Cancel</button></a>
+    </div>
+
+</div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar').find('.active').removeClass('active');
+        $('#customer').addClass('active');
+    });
+</script>
+<!--Js for form validation -->
+
+{% endblock %}
+<script>
+    form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    validateInputs();
+});
+
+</script>

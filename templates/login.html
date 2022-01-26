@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="{% static 'css/logincss.css' %}"></style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  
+  
+    
+    <div id="form_wrapper">
+      
+      
+      <div id="form_left">
+        <form action="/login" method="post">
+        {% csrf_token %}
+        <img src="{% static 'images/games1.jpg' %}" alt="computer icon" />
+        </div>
+        <div id="form_right">
+        <h1> Login</h1>
+        <div class="input_container">
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <input placeholder="username" type="text" name="username" id="username" class="input_field" />
+        </div>
+        <div class="input_container">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+          <input placeholder="Password" type="password"  name="password"  id="password"  class="input_field" />
+        </div>
+        <input type="submit" value="Login" id="input_submit" />
+      
+      {% for message in messages  %}
+      <p id =messages>{{message}}</p>
+      {% endfor %}
+    </form>
+          <a href="/registration">Create your account ➡ </a>
+        </span>
+     
+      </div>
+    </div>
+  </form>
+  </body>
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', e => {
+      console.log("helloe")
+    e.preventDefault();
+
+   
+});
+  </script>
+</html>
