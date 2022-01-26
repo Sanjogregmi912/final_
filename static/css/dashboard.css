@@ -79,7 +79,7 @@ table td, table th {
     padding: 8px;
 }
 table tr:nth-child(even){background-color: #45464545;}
-table tr:hover {background-color:white;}
+table tr:hover {background-color:blue;}
 table th {
     padding-top: 12px;
     padding-bottom: 12px;
