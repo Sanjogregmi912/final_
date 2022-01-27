@@ -13,5 +13,6 @@ urlpatterns = [
     path("customer_edit/customer_update/<int:p_id>",views.customer_update),
     path("customer_delete/<int:p_id>",views.customer_delete),
     
+    
 
 ]
