@@ -1,0 +1,66 @@
+{% extends "Dashboard.html" %}
+{% block content %}
+{% load static %}
+
+<!--Decoration details-->
+
+
+   
+    <!-- main sector /table area -->
+
+    <div class="table-responsive-md  table-responsive-sm ">
+        <table class="table table-bordered table-hover table-bordered table-striped"style="width:100%;">
+            <thead class="thead bg-light">
+            <tr>
+                <th scope="col">Game ID No </th>
+                <th scope="col"> Game Name</th>
+                <th scope="col"> Game Type</th>
+                <th scope="col"> Buying Price</th>
+                <th scope="col">Game Image</th>
+                <th scope="col">Actions </th>
+            </tr>
+            </thead>
+            {% for game in games %}
+            <tr class="tbody">
+                <td>{{game.id}}</td>
+                <td>{{game.name}}</td>
+                <td>{{game.type}}</td>
+                <td>{{game.price}}</td>
+                {% load static %}
+                <td>
+                    <img width="100" src="{% static 'images/' %}{{game.image}}"/>
+                </td>
+                <th>
+                    <a href="games_edit/{{game.id}}" style="color:green; text-decoration: none;" ><i class="fa fa-pencil" ></i> Edit Here </a>
+                    |
+                    <a href="games_delete/{{game.id}}" style="color:red; text-decoration:none;"><i class="fa fa-trash-o ml-2"></i> Delete Here </a>
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination d-flex justify-content-center">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {% if page > 1 %}
+            <button class="btn btn-secondary p-1" name="prev">Previous</button>
+            {% endif %}
+            <input class="text-center p-1" value="{{page}}" name="page" disabled />
+            {% if pageItem == 4 %}
+            <button name="next" class="btn btn-secondary p-1">Next</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+<a href="/games/games_add">
+    <button class="btn btn-success  mb-2 mt-2 "><i class="fa fa-plus mr-1"></i> Add Games Here </button>
+</a>
+<!--Script to make active sidebar-->
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar').find('.active').removeClass('active');
+        $('#decorations').addClass('active');
+    });
+    </script>
+{% endblock %}

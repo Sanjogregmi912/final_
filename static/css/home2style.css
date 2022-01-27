@@ -37,7 +37,7 @@ nav img{
 
 
 }
-navbar-nav
+.navbar-nav
 .nav-links ul li::after{
     content: '';
     width: 0%;
