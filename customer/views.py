@@ -1,11 +1,15 @@
 from multiprocessing import AuthenticationError
+import re
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
-
+from django.contrib.auth import authenticate, login,logout
 from customer.form import CustomerForm
 from customer.models import Customer
+from authenticate import Authentication
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -30,24 +34,21 @@ def login(request):
 
 
 def registration(request):
-    if request.method == 'POST':
-        form = CustomerForm(request.POST)
-        print(form)
-        if form.is_valid():
-            try:
-                print("valid")
-                form.save()
-                return redirect("login.html")
-            except:
-                print("validation failed")
+    if(request.method=="POST"):
+        form=CustomerForm(request.POST)
+
+        result = form.save()
+        print(result.id)
+        request.session['customer_id'] = result.id
+        return redirect('/games/games_all')
     else:
         form = CustomerForm()
-        print("invalid")
-        return render(request, "registration.html", {'form': form})
+        return render(request,'games/register.html',{'form':form})
 
+@login_required(login_url='/login')
 def dashboard(request):
     return render(request,"dashboard.html")
-
+@login_required(login_url='/login')
 def view(request):
     if request.method=="POST":
         page =int(request.POST['page'])
@@ -65,7 +66,7 @@ def view(request):
     customers =Customer.objects.raw("select * from customer_customer limit 4 offset % s",[offset])
     pageItem = len(customers)    
     return render(request,"customers/view.html",{'page':page,'customers':customers,'pageItem':pageItem})
-
+@login_required(login_url='/login')
 def customer_create(request):
     if request.method=="POST":
         form=CustomerForm(request.POST)
@@ -82,7 +83,7 @@ def customer_create(request):
         print("invalid")
     return render(request,"customers/create.html",{'form' :form})
 
-
+@login_required(login_url='/login')
 def customer_edit(request,p_id):
     try:
         customer = Customer.objects.get(id=p_id)
@@ -91,7 +92,7 @@ def customer_edit(request,p_id):
         print("No data Found")    
         return redirect("/view")
 
-
+@login_required(login_url='/login')
 def customer_update(request,p_id):
     customer = Customer.objects.get(id=p_id)
     form = CustomerForm(request.POST,instance=customer)
@@ -102,7 +103,7 @@ def customer_update(request,p_id):
         except:
             print("cannot change")
     return render(request,"customers/edit.html",{'customer':customer})
-
+@login_required(login_url='/login')
 def customer_delete(request,p_id):
     try:
         customer=Customer.objects.get(id=p_id)

@@ -1,0 +1,55 @@
+{% extends "Dashboard.html" %}
+{% block content %}
+{% load static %}
+
+<!--Decoration details-->
+
+
+   
+    <!-- main sector /table area -->
+
+    <div class="table-responsive-md  table-responsive-sm ">
+        <table class="table table-bordered table-hover table-bordered table-striped"style="width:100%;">
+            <thead class="thead bg-light">
+            <tr>
+                <th scope="col">Booking ID </th>
+                <th scope="col">Customer ID </th>
+                <th scope="col">Game ID </th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Date</th>
+                
+            </tr>
+            </thead>
+            {% for booking in bookings %}
+            <tr class="tbody">
+                <td>{{booking.booking_id}}</td>
+                <td><b>Customer ID:</b> {{booking.customer.id}}<br />
+                    <b>Customer Name:</b> {{booking.customer.name}}<br />
+                    <b>Customer Contact:</b> {{booking.customer.phone}}<br />
+                </td>
+                <td><b>Game ID:</b> {{booking.game.id}}<br />
+                    <b>Game Name:</b> {{booking.game.name}}<br />
+                    <b>Game Type:</b> {{booking.game.type}}<br />
+                    {% load static %}
+                    <img width="100" src="{% static 'images/' %}{{booking.game.image}}"/>
+                </td>
+                <td>{{booking.email}}</td>
+                <td>{{booking.phone}}</td>
+                <td>{{booking.date}}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+<!--Script to make active sidebar-->
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar').find('.active').removeClass('active');
+        $('#decorations').addClass('active');
+    });
+    </script>
+{% endblock %}
