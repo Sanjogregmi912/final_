@@ -1,9 +1,10 @@
-import re
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from authenticate import Authentication
 
 from user.form import UserForm
-
+@login_required(login_url='/login')
 def user_view(request):
     if(request.method == 'POST'):
         page = int(request.POST['page'])
@@ -20,6 +21,7 @@ def user_view(request):
     users=User.objects.raw("select * from auth_user limit 4 offset %s",[offset])
     pageItem=len(users)
     return render (request,"user/view.html",{'users':users,'page':page,'pageItem':pageItem})
+@login_required(login_url='/login')
 def user_create(request):
     if request.method == 'POST':
         username=request.POST['username']
@@ -30,7 +32,7 @@ def user_create(request):
         return redirect('/user_view')
 
     return render(request,'user/create.html')
-
+@login_required(login_url='/login')
 def user_edit(request,p_id):
     try:
         user=User.objects.get(id=p_id)
@@ -38,7 +40,7 @@ def user_edit(request,p_id):
     except:
         print("No data found")
     return redirect('/user_view')
-
+@login_required(login_url='/login')
 def user_update(request,p_id):
     user=User.objects.get(id=p_id)
     form=UserForm(request.POST,instance=user)
@@ -49,7 +51,7 @@ def user_update(request,p_id):
         except:
             print("Cannot update")
     return render(request,"user/edit.html",{'user':user})
-
+@login_required(login_url='/login')
 def user_delete(request,p_id):
     try:
         user=User.objects.get(id=p_id)

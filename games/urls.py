@@ -11,6 +11,7 @@ urlpatterns = [
     path('games_rpg',views.games_rpg),
     path('games_battle',views.games_battle),
     path('games_board',views.games_board),
+    path("booking_view",views.booking_view)
    
     
 ]
