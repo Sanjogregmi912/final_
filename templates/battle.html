@@ -21,11 +21,11 @@
                         <b>Price:</b>  {{game.price}}<br />
                         <form method="post" action="#">
                             {% if request.session.customer_id %}
-                            <a class="btn btn-success ml-5 mt-3" href="/booking/booking/{{game.id}}"
-                               title="Book Now">Book Now</a>
+                            <a class="btn btn-success ml-5 mt-3" href="/booking/booking_new/{{game.id}}"
+                               title="Book Now">Buy  Now</a>
                             
                             {% else %}
-                            <a class="btn btn-success ml-5 mt-3" href="/register" title="Register">Buy Now</a>
+                            <a class="btn btn-success ml-5 mt-3" href="/registration" title="Register">Register Here First</a>
                             <p class="ml-5" >Please register first </p>
                             {% endif %}
                         </form>

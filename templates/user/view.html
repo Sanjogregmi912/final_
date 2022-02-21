@@ -13,8 +13,8 @@
 <!-- main sector /table area -->
     <div class="table-responsive-md  table-responsive-sm ml-3" >
         <table class="table table-bordered table-hover table-bordered table-striped" style="width:100%;" >
-            <thead class="thead bg-light">
-               <tr>
+            <thead class="thead bg-light" >
+               <tr style="color: aqua;">
                    <th scope="col"> Admin ID</th>
                    <th scope="col">User name</th>
                    <th scope="col">Email Address</th>
@@ -41,24 +41,17 @@
         </table>
     </div>
 <!-- Pagination -->
- <div class="pagination d-flex justify-content-center">
-      <form method="POST" action="">
-            {% csrf_token %}
-            {% if page > 1 %}
-            <button class="btn btn-secondary p-1" name="prev">Previous</button>
-            {% endif %}
-            <input readonly class="text-center p-1"  value="{{page}}" name="page" disabled />
-            {% if pageItem == 4 %}
-            <button name="next" class="btn btn-secondary p-1">Next</button>
-            {% endif %}
-      </form>
- </div>
-   </div>
-<!--Script to make active sidebar-->
-<script type="text/javascript">
-    $(function () {
-        $('.sidebar').find('.active').removeClass('active');
-        $('#user').addClass('active');
-    });
-</script>
-{% endblock %}
+<div class="pagination d-flex justify-content-center">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {% if page > 1 %}
+        <button class="btn btn-secondary p-1" name="prev">Previous</button>
+        {% endif %}
+        <input class="text-center p-1" value="{{page}}" name="page" />
+        {% if pageItem == 4 %}
+        <button name="next" class="btn btn-secondary p-1">Next</button>
+        {% endif %}
+    </form>
+</div>
+</div>
+

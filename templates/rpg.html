@@ -10,22 +10,22 @@
             {% for game in games %}
             <!-- Images in card-->
             <div class="col-lg-4 col-md-6 my-4">
-                <div class="card">
+                <div class="card bg-dark">
                     {% load static %}
                     <img height="390px" src="{% static 'images/' %}{{game.image}}"/>
                     <!--  Decoration details -->
-                    <div class="card-body">
+                    <div class="card-body " style="color: white;">
                         <b>game ID:</b>  {{game.id}}<br />
                         <b>game Name:</b>  {{game.name}}<br />
                         <b>game Type:</b>  {{game.type}}<br />
                         <b>Price:</b>  {{game.price}}<br />
                         <form method="post" action="#">
                             {% if request.session.customer_id %}
-                            <a class="btn btn-success ml-5 mt-3" href="/booking/booking/{{game.id}}"
-                               title="Book Now">Book Now</a>
+                            <a class="btn btn-success ml-5 mt-3" href="/booking/booking_new/{{game.id}}"
+                               title="Book Now">Buy  Now</a>
                             
                             {% else %}
-                            <a class="btn btn-success ml-5 mt-3" href="/register" title="Register">Buy Now</a>
+                            <a class="btn btn-success ml-5 mt-3" href="/registration" title="Register">Register Here First</a>
                             <p class="ml-5" >Please register first </p>
                             {% endif %}
                         </form>

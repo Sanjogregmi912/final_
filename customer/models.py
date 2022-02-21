@@ -8,3 +8,5 @@ class Customer(models.Model):
 
 class Meta:
     bd_table='customer'
+
+

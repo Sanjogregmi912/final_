@@ -8,6 +8,10 @@
     <title>Go For Game</title>
     <link rel="stylesheet" href="{% static 'css/home2style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+    crossorigin="anonymous">
     <script src= "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -15,13 +19,16 @@
         <div></div>
     </div>
     <section class="header">
+        
         <nav>
-            <h1 class="logo">Go for game</h1>
+            <h1 class="logo" style="color:aquablue;">Go for game</h1>
                <div class="nav-links" id="navLinks" >
                 <i class="fa fa-times" onclick="hidemenu()"></i>
 
-                   <ul>
-                       <li><a href="/login">Login</a></li>
+                   <ul >
+                    <li ><a href="/login" style="color:white; text-decoration:none;">Home</a></li>
+                       <li ><a href="/login" style="color:white; text-decoration:none;">Login</a></li>
+                       
                    
                    </ul>
                </div>
@@ -32,12 +39,52 @@
     <h1>Enjoy Games at affortable prices</h1>
 
     </div>
+    <div class="scroll-down">
+    </div>
     </section>
+
   
 </section>
+
+<title>All Games  </title>
+
+<section class="game-section bg-light">
+    <h1>Our Top Most Games </h1>
+    <div class="container-fluid game-col">
+        <div class="row">
+            {% for game in games %}
+            <!-- Images in card-->
+            <div class="col-lg-6 col-md-6 my-4">
+                <div class="card">
+                    {% load static %}
+                    <img height="390px" src="{% static 'images/' %}{{game.image}}"/>
+                    <!--  Decoration details -->
+                    <div class="card-body">
+                        <b>game ID:</b>  {{game.id}}<br />
+                        <b>game Name:</b>  {{game.name}}<br />
+                        <b>game Type:</b>  {{game.type}}<br />
+                        <b>Price:</b>  {{game.price}}<br />
+                        <form method="post" action="#">
+                            {% if request.session.customer_id %}
+                            <a class="btn btn-success ml-5 mt-3" href="/booking/booking_new/{{game.id}}"
+                               title="Book Now">Buy  Now</a>
+                            
+                            {% else %}
+                            <a class="btn btn-success ml-5 mt-3" href="/registration" title="Register" >Register Here First</a>
+                            <p class="ml-5"style="color:red;" >***Please register first </p>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <!--Facilities-->
 <section class="facilities">
-    <h1> Our Games</h1>
+    <h1> Our Gaming catagory </h1>
     <p>
     </p>
       <div class="row">
@@ -65,6 +112,75 @@
 
 </section>
 <!--- comments-->
+<section>
+    <h3 style="margin-right: 20px;">Contact Form</h3>
+    {% for message in messages  %}
+    <p style="color:green;" id =messages>****{{message}}****</p>
+    {% endfor %}
+
+<div class="container">
+  <form action="/contact/contactnew" method="post">
+      {% csrf_token %}
+    <label for="fname">Your Name</label>
+    <input type="text" id="fname" name="name" placeholder="Your name..">
+
+    <label for="lname">Phone Number </label>
+    <input type="text" id="lname" name="phone" placeholder="Your Phone Number..">
+
+    <label for="lname"> Email Address </label>
+    <input type="text" id="lname" name="email" placeholder="Your Email Address..">
+
+    <label for="country">Contact Type</label>
+    <select id="country" name="type">
+      <option value="suggestion">Suggestion</option>
+      <option value="product">Games </option>
+      <option value="product">Feedback </option>
+      <option value="website bugs">Website Bugs</option>
+      <option value="delivery">Delivery</option>
+      <option value="delivery">complain</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input class="btnsubmit" type="submit" value="Submit">
+  </form>
+</div>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+    
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+    .container {
+      border-radius: 5px;
+      background-color: white;
+      padding: 20px;
+    }
+    </style>
+</section>
 
 
 <section class="footer">

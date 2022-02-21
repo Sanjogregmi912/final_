@@ -21,6 +21,7 @@ urlpatterns = [
     path('',include('customer.urls')),
     path('',include('user.urls')),
     path('games/',include('games.urls')),
-    path('booking/',include('booking.urls'))
+    path('booking/',include('booking.urls')),
+    path('contact/',include('contact.urls'))
 
 ]

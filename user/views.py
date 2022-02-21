@@ -40,6 +40,10 @@ def user_edit(request,p_id):
     except:
         print("No data found")
     return redirect('/user_view')
+
+
+
+    
 @login_required(login_url='/login')
 def user_update(request,p_id):
     user=User.objects.get(id=p_id)
@@ -59,3 +63,14 @@ def user_delete(request,p_id):
     except:
         print("No data found")
     return redirect('/user_view')
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        user = User.objects.create_user(
+            username=username,email=email,password=password
+        )
+        user.save()
+        return redirect('/login')
+    return render(request,'adminregister.html')

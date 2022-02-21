@@ -10,13 +10,16 @@ from customer.models import Customer
 from authenticate import Authentication
 from django.contrib.auth.decorators import login_required
 
+from games.models import Games
+
 
 
 
 
 
 def homepage(request):
-    return render(request, 'mainpage.html')
+    games = Games.objects.all()
+    return render(request, 'mainpage.html',{'games':games})
 
 
 def login(request):
@@ -48,6 +51,8 @@ def registration(request):
 @login_required(login_url='/login')
 def dashboard(request):
     return render(request,"dashboard.html")
+
+  
 @login_required(login_url='/login')
 def view(request):
     if request.method=="POST":
