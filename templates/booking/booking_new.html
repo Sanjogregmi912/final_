@@ -25,9 +25,10 @@
                </div>
            </div>
            <!--Booking Form   -->
+           <h1>{{game.id}}</h1>
            <div class="col-lg-6 col-md-8 col-sm-8 " style="margin-left: -30px;height:390px;">
                <div  class="card-body bg-dark">
-                 <form method="POST" action="/booking/booking_final" onsubmit="return(validate())">
+                 <form method="POST" action="/booking/booking_final" >
                    {% csrf_token %}
                    <!--Customer ID-->
                    <div class="input-group md-form form-sm mb-2">

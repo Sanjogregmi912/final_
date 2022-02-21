@@ -21,7 +21,7 @@ def games_view(request):
         offset = tempOffSet*4
         print(offset)
     else:
-        offset = 0
+        offset = 0 
         page = 1
     games = Games.objects.raw(
         "select * from games limit 4 offset % s", [offset])
@@ -44,7 +44,7 @@ def games_add(request):
             form = GameForm()
             print("invalid")
 
-    return render(request, 'games/create.html')
+    return render(request, 'games/create.html',{'form':form})
 
 @login_required(login_url='/login')
 def games_edit(request, p_id):
